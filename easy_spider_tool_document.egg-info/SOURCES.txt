@@ -1,0 +1,10 @@
+README.md
+setup.py
+easy_spider_tool_document/__init__.py
+easy_spider_tool_document/data.py
+easy_spider_tool_document/xpath.py
+easy_spider_tool_document.egg-info/PKG-INFO
+easy_spider_tool_document.egg-info/SOURCES.txt
+easy_spider_tool_document.egg-info/dependency_links.txt
+easy_spider_tool_document.egg-info/requires.txt
+easy_spider_tool_document.egg-info/top_level.txt
