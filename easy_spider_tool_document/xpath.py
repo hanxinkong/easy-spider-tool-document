@@ -18,6 +18,10 @@ def xpath(src_data: etree.HTML, expr: Union[str, List[str]], first: bool = False
 
     for i in expr:
         values = src_data.xpath(i)
+        # 处理值本身为None的情况
+        if isinstance(values, list) and not list(filter(None, values)):
+            values = False
+
         if values:
             break
 

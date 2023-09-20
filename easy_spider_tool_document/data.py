@@ -52,8 +52,8 @@ def element_type(string: str) -> str:
 def data_extractor(src_data, expr: Union[str, List[str]], first: bool = False, default=None):
     """json，xpath选择器"""
     # assert src_data, ''
-    # if len(src_data) < 1:
-    #     return default
+    if not src_data:
+        return default
 
     ele_type = element_type(src_data)
 

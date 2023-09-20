@@ -11,4 +11,4 @@ from .data import data_extractor, is_format_element
 __author__ = 'hanxinkong'
 __author_email__ = 'xinkonghan@gmail.com'
 
-__version__ = "1.0.10"
+__version__ = "1.0.12"
