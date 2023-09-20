@@ -46,33 +46,39 @@ def element_type(string: str) -> str:
         return 'json'
     elif is_format_element(string):
         return 'element'
+    return None
 
 
 def data_extractor(src_data, expr: Union[str, List[str]], first: bool = False, default=None):
     """json，xpath选择器"""
     # assert src_data, ''
-    if len(src_data) < 1:
-        return default
+    # if len(src_data) < 1:
+    #     return default
 
     ele_type = element_type(src_data)
+
+    if ele_type is None:
+        return default
+
     values = None
 
     if isinstance(expr, str):
         expr = [expr]
 
+    json_expr = list(filter(lambda x: x.startswith('$'), expr))
+    xpath_expr = list(filter(lambda x: x.startswith('.') or x.startswith('/'), expr))
+
     if ele_type == 'json':
-        expr = list(filter(lambda x: x.startswith('$'), expr))
-        if expr:
+        if json_expr:
             data = to_dict(src_data)
-            values = jsonpath(data, expr, first=first, default=default)
+            values = jsonpath(data, json_expr, first=first, default=default)
 
     if ele_type == 'element':
-        expr = list(filter(lambda x: x.startswith('.') or x.startswith('/'), expr))
-        if any(expr):
+        if any(xpath_expr):
             data = to_element(src_data)
-            values = xpath(data, expr, first=first, default=default)
+            values = xpath(data, xpath_expr, first=first, default=default)
 
-    if not values:
+    if len(values) < 1:
         values = default
 
     return values
